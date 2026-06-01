@@ -1,0 +1,66 @@
+{
+  "name": "react-native-scanner-camera",
+  "version": "1.0.0",
+  "description": "Barcode scanner for React Native. Compatible with 16KB page size (Android 15+).",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "source": "src/index.tsx",
+  "files": [
+    "lib",
+    "android/src",
+    "android/build.gradle",
+    "ios",
+    "*.podspec",
+    "react-native.config.js"
+  ],
+  "scripts": {
+    "build": "bob build",
+    "prepare": "bob build"
+  },
+  "keywords": [
+    "react-native",
+    "barcode",
+    "scanner",
+    "camera",
+    "qrcode",
+    "zxing",
+    "ios",
+    "android"
+  ],
+  "author": "Nach02 <ignaciomartinez@vaypol.com.ar>",
+  "homepage": "https://github.com/Nach02/react-native-scanner-camera",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nach02/react-native-scanner-camera"
+  },
+  "bugs": {
+    "url": "https://github.com/Nach02/react-native-scanner-camera/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.73.0",
+    "react-native-permissions": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    "react-native-builder-bob": "^0.23.0",
+    "react-native-permissions": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      ["typescript", { "project": "tsconfig.build.json" }]
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
