@@ -12,5 +12,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Nach02/react-native-scanner-camera.git", :tag => "#{s.version}" }
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   s.dependency   "React-Core"
-  s.pod_target_xcconfig = { "SWIFT_VERSION" => "5.0" }
+  s.pod_target_xcconfig = {
+    "SWIFT_VERSION" => "5.0",
+    "SWIFT_OBJC_BRIDGING_HEADER" => "$(PODS_TARGET_SRCROOT)/ios/ScannerCamera-Bridging-Header.h"
+  }
 end
