@@ -42,6 +42,7 @@ class ScannerView(context: Context) : FrameLayout(context), LifecycleOwner, Text
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraStarted = false
     private var lastScannedMs = 0L
+    private var previewSurface: Surface? = null
 
     var scanAreaFraction: Float = 1.0f
 
@@ -90,6 +91,8 @@ class ScannerView(context: Context) : FrameLayout(context), LifecycleOwner, Text
         super.onDetachedFromWindow()
         cameraProvider?.unbindAll()
         cameraProvider = null
+        previewSurface?.release()
+        previewSurface = null
         cameraStarted = false
         readySurface = null
         cameraExecutor?.shutdown()
@@ -106,9 +109,13 @@ class ScannerView(context: Context) : FrameLayout(context), LifecycleOwner, Text
 
     override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
         Log.d("Scanner", "onSurfaceTextureDestroyed")
-        // Stop camera BEFORE surface is released — prevents emulator virtual camera corruption
         cameraProvider?.unbindAll()
         cameraProvider = null
+        // Release the Surface before returning true so the SurfaceTexture is not
+        // freed by Android while CameraX still holds a reference to it.
+        previewSurface?.release()
+        previewSurface = null
+        cameraStarted = false
         readySurface = null
         return true
     }
@@ -131,7 +138,9 @@ class ScannerView(context: Context) : FrameLayout(context), LifecycleOwner, Text
                 preview.setSurfaceProvider { request ->
                     st.setDefaultBufferSize(request.resolution.width, request.resolution.height)
                     val surface = Surface(st)
+                    previewSurface = surface
                     request.provideSurface(surface, ContextCompat.getMainExecutor(context)) {
+                        previewSurface = null
                         surface.release()
                     }
                 }

@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import React
 
 @objc(CameraView)
 class CameraView: UIView {

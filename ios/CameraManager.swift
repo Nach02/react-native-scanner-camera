@@ -1,4 +1,5 @@
 import Foundation
+import React
 
 @objc(CameraManager)
 class CameraManager: RCTViewManager {

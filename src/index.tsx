@@ -9,6 +9,7 @@ import {
 const NativeScanner = requireNativeComponent<{
   codeTypes: string[];
   scanAreaFraction?: number;
+  showScanArea?: boolean;
   onScan?: (event: NativeSyntheticEvent<{value: string}>) => void;
   style?: StyleProp<ViewStyle>;
 }>('Scanner');
@@ -17,11 +18,13 @@ export interface ScannerProps {
   codeTypes: string[];
   /** Fraction of the center of the camera image to scan (0.0–1.0). Default: 1.0 (full frame). */
   scanAreaFraction?: number;
+  /** Show a red debug overlay indicating the actual scan area. iOS only. */
+  showScanArea?: boolean;
   onScan: (value: string) => void;
   style?: StyleProp<ViewStyle>;
 }
 
-const Scanner: React.FC<ScannerProps> = ({onScan, codeTypes, scanAreaFraction, style}) => {
+const Scanner: React.FC<ScannerProps> = ({onScan, codeTypes, scanAreaFraction, showScanArea, style}) => {
   const onScanRef = useRef(onScan);
   onScanRef.current = onScan;
 
@@ -34,6 +37,7 @@ const Scanner: React.FC<ScannerProps> = ({onScan, codeTypes, scanAreaFraction, s
       style={style}
       codeTypes={codeTypes}
       scanAreaFraction={scanAreaFraction}
+      showScanArea={showScanArea}
       onScan={handleScan}
     />
   );

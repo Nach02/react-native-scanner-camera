@@ -1,4 +1,5 @@
 #import <React/RCTViewManager.h>
+#import <React/RCTUIManager.h>
 
 @interface RCT_EXTERN_MODULE(CameraManager, RCTViewManager)
 RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock)
