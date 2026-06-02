@@ -1,6 +1,6 @@
 {
   "name": "react-native-scanner-camera",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Barcode scanner for React Native. Compatible with 16KB page size (Android 15+).",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -57,7 +57,12 @@
     "targets": [
       "commonjs",
       "module",
-      ["typescript", { "project": "tsconfig.build.json" }]
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ]
   },
   "publishConfig": {

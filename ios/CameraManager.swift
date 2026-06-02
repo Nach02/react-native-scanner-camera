@@ -7,10 +7,10 @@ class CameraManager: RCTViewManager {
         return CameraView()
     }
 
-    override func receiveCommand(_ view: UIView!, commandKey: String!, args: NSArray!) {
-        guard let cameraView = view as? CameraView else { return }
-        if commandKey == "takePhoto" {
-            cameraView.takePhoto()
+    @objc func takePhoto(_ reactTag: NSNumber) {
+        DispatchQueue.main.async {
+            guard let view = self.bridge.uiManager.view(forReactTag: reactTag) as? CameraView else { return }
+            view.takePhoto()
         }
     }
 
